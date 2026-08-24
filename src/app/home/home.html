@@ -1,0 +1,201 @@
+<div class="min-h-screen bg-white text-black p-8">
+
+  <!-- Employee List -->
+  <div class="max-w-6xl mx-auto">
+
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h2 class="text-3xl font-bold tracking-tight">Employee List</h2>
+        <p class="text-gray-500 mt-1">Manage and view all employees</p>
+      </div>
+
+     
+    </div>
+
+    <!-- Table -->
+    <div class="border border-black rounded-lg overflow-hidden">
+
+      <table class="w-full border-collapse">
+
+        <thead>
+          <tr class="bg-black text-white">
+            <th class="px-5 py-4 text-left text-sm font-semibold">ID</th>
+            <th class="px-5 py-4 text-left text-sm font-semibold">Name</th>
+            <th class="px-5 py-4 text-left text-sm font-semibold">Role</th>
+            <th class="px-5 py-4 text-left text-sm font-semibold">Salary</th>
+            <th class="px-5 py-4 text-center text-sm font-semibold">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          @for (employee of employees(); track employee.id) {
+
+            <tr class="border-t border-gray-200 hover:bg-gray-50 transition">
+
+              <td class="px-5 py-4 font-mono text-sm">
+                {{ employee.id }}
+              </td>
+
+              <td class="px-5 py-4 font-medium">
+                {{ employee.name }}
+              </td>
+
+              <td class="px-5 py-4 text-gray-600">
+                {{ employee.role }}
+              </td>
+
+              <td class="px-5 py-4 font-medium">
+                ₹{{ employee.salary }}
+              </td>
+
+              <td class="px-5 py-4">
+                <div class="flex justify-center gap-2">
+
+                  <button
+                    class="border border-black px-3 py-1.5 rounded-md text-sm
+                           hover:bg-black hover:text-white transition"
+                    (click)="viewEmployee(employee)">
+                    View
+                  </button>
+
+                  <button
+                    class="border border-gray-500 px-3 py-1.5 rounded-md text-sm
+                           hover:bg-gray-200 transition"
+                    (click)="editEmployee(employee)">
+                    Edit
+                  </button>
+
+                  <button
+                    class="border border-black bg-black text-white px-3 py-1.5
+                           rounded-md text-sm hover:bg-gray-800 transition"
+                    (click)="deleteEmployee(employee)">
+                    Delete
+                  </button>
+
+                </div>
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+      </table>
+
+    </div>
+
+
+    <!-- Employee Details -->
+    @if (selectedEmployee(); as employee) {
+
+      <div class="mt-8 border border-black rounded-lg p-6">
+
+        <div class="flex justify-between items-center mb-5">
+          <div>
+            <h2 class="text-xl font-bold">Employee Details</h2>
+            <p class="text-sm text-gray-500">
+              Selected employee information
+            </p>
+          </div>
+
+          <span class="border border-black px-3 py-1 rounded-full text-xs font-medium">
+            ID: {{ employee.id }}
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <div>
+            <p class="text-xs uppercase text-gray-500 mb-1">Name</p>
+            <p class="font-semibold">{{ employee.name }}</p>
+          </div>
+
+          <div>
+            <p class="text-xs uppercase text-gray-500 mb-1">Role</p>
+            <p class="font-semibold">{{ employee.role }}</p>
+          </div>
+
+          <div>
+            <p class="text-xs uppercase text-gray-500 mb-1">Salary</p>
+            <p class="font-semibold">₹{{ employee.salary }}</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+
+    <!-- Edit Employee -->
+    @if (editingEmployee(); as employee) {
+
+      <div class="mt-8 border border-black rounded-lg p-6">
+
+        <div class="mb-6">
+          <h2 class="text-xl font-bold">Edit Employee</h2>
+          <p class="text-sm text-gray-500">
+            Update employee information
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+          <div>
+            <label class="block text-sm font-medium mb-2">
+              Name
+            </label>
+
+            <input
+              [(ngModel)]="employee.name"
+              class="w-full border border-gray-400 rounded-md px-3 py-2
+                     outline-none focus:border-black"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-2">
+              Role
+            </label>
+
+            <input
+              [(ngModel)]="employee.role"
+              class="w-full border border-gray-400 rounded-md px-3 py-2
+                     outline-none focus:border-black"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-2">
+              Salary
+            </label>
+
+            <input
+              [(ngModel)]="employee.salary"
+              type="number"
+              class="w-full border border-gray-400 rounded-md px-3 py-2
+                     outline-none focus:border-black"
+            />
+          </div>
+
+        </div>
+
+        <div class="flex justify-end mt-6">
+
+          <button
+            class="bg-black text-white px-5 py-2 rounded-md
+                   hover:bg-gray-800 transition font-medium"
+            (click)="updateEmployee(employee)">
+            Update Employee
+          </button>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>
