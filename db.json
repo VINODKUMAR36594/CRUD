@@ -17,6 +17,12 @@
       "name": "Amit Verma",
       "role": "Manager",
       "salary": 70000
+    },
+    {
+      "id": "v691g4VrNdQ",
+      "name": "Amit Verma",
+      "role": "Manager",
+      "salary": 70000
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
